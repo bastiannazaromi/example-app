@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -13,17 +14,22 @@ class CategoryController extends Controller
     //     return "ID: $id, Kategori: $kategori";
     // }
 
-    public function sapa($nama)
-    {
-        echo 'Halo, ' . $nama;
-    }
+    // public function sapa($nama)
+    // {
+    //     echo 'Halo, ' . $nama;
+    // }
 
     public function index()
     {
-        $data = [
-            'title'    => 'Kategori'
-        ];
+        $title = 'Management Kategori';
 
-        return view('category.index', compact('data'));
+        $categories = Category::where('view_count', '>', 500)
+            ->orderBy('view_count', 'desc')
+            ->get();
+
+        return view('category.index', [
+            'title'      => $title,
+            'categories' => $categories
+        ]);
     }
 }
