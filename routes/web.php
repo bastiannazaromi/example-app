@@ -20,3 +20,6 @@ Route::get('/sapa/{nama}', [CategoryController::class, 'sapa']);
 
 // Category
 Route::get('/category', [CategoryController::class, 'index']);
+Route::get('/category/create', [CategoryController::class, 'create']);
+Route::post('/category', [CategoryController::class, 'store']);
+Route::delete('/category/{id}', [CategoryController::class, 'destroy']);

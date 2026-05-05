@@ -23,13 +23,42 @@ class CategoryController extends Controller
     {
         $title = 'Management Kategori';
 
-        $categories = Category::where('view_count', '>', 500)
-            ->orderBy('view_count', 'desc')
-            ->get();
+        $categories = Category::orderBy('name', 'asc')->get();
 
         return view('category.index', [
             'title'      => $title,
             'categories' => $categories
         ]);
+    }
+
+    public function create()
+    {
+        $title = 'Tambah Kategori';
+
+        return view('category.create', [
+            'title' => $title
+        ]);
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'name'        => 'required|unique:categories|max:255',
+            'description' => 'required',
+        ]);
+
+        $validated['slug'] = str($validated['name'])->slug();
+
+        Category::create($validated);
+
+        return redirect('/category')->with('success', 'Kategori berhasil ditambahkan!');
+    }
+
+    public function destroy($id)
+    {
+        $category = Category::findOrFail($id);
+        $category->delete();
+
+        return redirect('/category')->with('success', 'Kategori berhasil dihapus!');
     }
 }
