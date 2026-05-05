@@ -9,7 +9,7 @@
     <div class="card border-0 shadow-sm">
         <div class="card-header bg-white py-3">
             <a href="/category/create" class="btn btn-primary btn-sm">
-                <i class="bi bi-plus-lg"></i> Tambah
+                <i class="bi bi-plus-lg"></i> Add
             </a>
         </div>
         <div class="card-body">
@@ -17,12 +17,12 @@
                 <thead>
                     <tr class="text-center">
                         <th>#</th>
-                        <th>Nama Kategori</th>
+                        <th>Category Name</th>
                         <th>Slug</th>
-                        <th>Deskripsi</th>
-                        <th>Dilihat</th>
+                        <th>Description</th>
+                        <th>Viewed</th>
                         <th>Status</th>
-                        <th>Aksi</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,9 +38,9 @@
                             </td>
                             <td class="text-center">
                                 @if ($category->is_active)
-                                    <span class="badge bg-success">Aktif</span>
+                                    <span class="badge bg-success">Active</span>
                                 @else
-                                    <span class="badge bg-secondary">Non-Aktif</span>
+                                    <span class="badge bg-secondary">Inactive</span>
                                 @endif
                             </td>
                             <td class="text-center">
@@ -58,7 +58,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="text-center text-muted">Tidak ada data kategori</td>
+                            <td colspan="6" class="text-center text-muted">No category data available</td>
                         </tr>
                     @endforelse
                 </tbody>
