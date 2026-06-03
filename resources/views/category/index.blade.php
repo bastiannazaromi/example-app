@@ -45,7 +45,9 @@
                             </td>
                             <td class="text-center">
                                 <div class="btn-group">
-                                    <button class="btn btn-sm btn-warning"><i class="bi bi-pencil"></i></button>
+                                    <a href="/category/{{ $category->id }}/edit" class="btn btn-sm btn-warning">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
                                     <form action="/category/{{ $category->id }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')

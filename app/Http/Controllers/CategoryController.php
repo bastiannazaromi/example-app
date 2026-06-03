@@ -61,4 +61,30 @@ class CategoryController extends Controller
 
         return redirect('/category')->with('success', 'Kategori berhasil dihapus!');
     }
+
+    public function edit($id)
+    {
+        $category = Category::findOrFail($id);
+        return view('category.edit', [
+            'title'    => 'Edit Kategori',
+            'category' => $category
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $category = Category::findOrFail($id);
+
+        $validated = $request->validate([
+            'name'        => 'required|max:255|unique:categories,name,' . $category->id,
+            'description' => 'required',
+            'is_active'   => 'required|boolean'
+        ]);
+
+        $validated['slug'] = str($validated['name'])->slug();
+
+        $category->update($validated);
+
+        return redirect('/category')->with('success', 'Kategori berhasil diperbarui!');
+    }
 }
