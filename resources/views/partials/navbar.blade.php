@@ -7,15 +7,20 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="/">Dashboard</a>
+                    <a class="nav-link {{ Request::is('/') || Request::is('dashboard') ? 'active' : '' }}"
+                        href="/">Dashboard</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ Request::is('category*') ? 'active' : '' }}" href="/category">Kategori</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ Request::is('posts*') ? 'active' : '' }}" href="/posts">Berita</a>
-                </li>
+
+                @auth
+                    <li class="nav-item">
+                        <a class="nav-link {{ Request::is('category*') ? 'active' : '' }}" href="/category">Kategori</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ Request::is('posts*') ? 'active' : '' }}" href="/posts">Berita</a>
+                    </li>
+                @endauth
             </ul>
+
             <ul class="navbar-nav ms-auto">
                 @auth
                     <li class="nav-item dropdown">
@@ -32,13 +37,14 @@
                             </li>
                         </ul>
                     </li>
-                @endguest
+                @endauth
+
                 @guest
                     <li class="nav-item">
-                        <a class="nav-link" href="/login">Login</a>
+                        <a class="nav-link {{ Request::is('login') ? 'active' : '' }}" href="/login">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/register">Register</a>
+                        <a class="nav-link {{ Request::is('register') ? 'active' : '' }}" href="/register">Register</a>
                     </li>
                 @endguest
             </ul>
