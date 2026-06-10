@@ -4,9 +4,9 @@
 @section('page_heading', $title)
 
 @section('container')
-    @include('partials.alert')
-
     <div class="card border-0 shadow-sm">
-
+        <div class="card-body">
+            <p>Ini adalah halaman dashboard</p>
+        </div>
     </div>
 @endsection
