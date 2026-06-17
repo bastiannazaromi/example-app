@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DashboardController::class, 'index']);
@@ -14,6 +15,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/category/{id}/edit', [CategoryController::class, 'edit']);
     Route::put('/category/{id}', [CategoryController::class, 'update']);
     Route::delete('/category/{id}', [CategoryController::class, 'destroy']);
+
+    Route::get('/posts', [PostController::class, 'index']);
+    Route::get('/posts/create', [PostController::class, 'create']);
+    Route::post('/posts', [PostController::class, 'store']);
+    Route::get('/posts/{id}/edit', [PostController::class, 'edit']);
+    Route::put('/posts/{id}', [PostController::class, 'update']);
+    Route::delete('/posts/{id}', [PostController::class, 'destroy']);
 });
 
 require __DIR__ . '/auth.php';
