@@ -10,7 +10,7 @@
                 <div class="card-body">
                     @include('partials.alert')
 
-                    <form action="/posts" method="POST">
+                    <form action="/posts" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <label class="form-label">Title</label>
@@ -42,6 +42,16 @@
                             <label class="form-label">Content</label>
                             <textarea name="content" class="form-control @error('content') is-invalid @enderror" rows="6" required>{{ old('content') }}</textarea>
                             @error('content')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Post Image</label>
+                            <input type="file" name="image" class="form-control @error('image') is-invalid @enderror"
+                                accept=".jpg, .jpeg, .png">
+                            <div class="form-text">Format: JPG, JPEG, PNG. Maksimal 2MB.</div>
+                            @error('image')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>

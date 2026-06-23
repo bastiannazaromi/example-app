@@ -10,7 +10,7 @@
                 <div class="card-body">
                     @include('partials.alert')
 
-                    <form action="/posts/{{ $post->id }}" method="POST">
+                    <form action="/posts/{{ $post->id }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
@@ -59,6 +59,23 @@
                                     value="0" {{ !$post->is_published ? 'checked' : '' }}>
                                 <label class="form-check-label" for="draft">Draft</label>
                             </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Post Image</label>
+
+                            @if ($post->image)
+                                <div class="mb-2">
+                                    <img src="{{ asset('storage/' . $post->image) }}" class="img-thumbnail d-block"
+                                        style="max-height: 150px;">
+                                </div>
+                            @endif
+
+                            <input type="file" name="image" class="form-control @error('image') is-invalid @enderror"
+                                accept=".jpg, .jpeg, .png">
+                            @error('image')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <button type="submit" class="btn btn-primary">Update Post</button>
