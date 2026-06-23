@@ -10,7 +10,7 @@
         <div
             class="card-header bg-white py-3 d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
             <a href="/posts/create" class="btn btn-primary btn-sm me-auto">
-                <i class="bi bi-plus-lg"></i> Add New Post
+                <i class="bi bi-plus-lg"></i> Add
             </a>
 
             <form action="/posts" method="GET" class="d-flex gap-2 col-md-4">
