@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -56,5 +57,44 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function avatarEdit()
+    {
+        return view('profile.avatar', [
+            'title' => 'Upload Foto Profil',
+            'user'  => Auth::user()
+        ]);
+    }
+
+    public function avatarUpdate(Request $request)
+    {
+        $request->validate([
+            'avatar' => 'required|image|file|max:5120|mimes:jpeg,png,jpg'
+        ]);
+
+        $user = Auth::user();
+
+        if ($request->file('avatar')) {
+            if ($user->avatar) {
+                Storage::disk('public')->delete($user->avatar);
+            }
+
+            $path = $request->file('avatar')->store('avatars', 'public');
+
+            $user->avatar = $path;
+            $user->save();
+
+            return response()->json([
+                'success'    => true,
+                'message'    => 'Foto profil berhasil diperbarui!',
+                'avatar_url' => asset('storage/' . $path)
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Gagal mengunggah gambar.'
+        ], 400);
     }
 }

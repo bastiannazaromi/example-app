@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DashboardController::class, 'index']);
@@ -22,6 +23,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/posts/{id}/edit', [PostController::class, 'edit']);
     Route::put('/posts/{id}', [PostController::class, 'update']);
     Route::delete('/posts/{id}', [PostController::class, 'destroy']);
+
+    Route::get('/profile/avatar', [ProfileController::class, 'avatarEdit']);
+    Route::post('/profile/avatar/update', [ProfileController::class, 'avatarUpdate']);
 });
 
 require __DIR__ . '/auth.php';

@@ -29,6 +29,9 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li>
+                                <a class="dropdown-item" href="/profile/avatar"><i class="bi bi-person"></i> Avatar</a>
+                            </li>
+                            <li>
                                 <form action="/logout" method="POST">
                                     @csrf
                                     <button type="submit" class="dropdown-item"><i class="bi bi-box-arrow-right"></i>
