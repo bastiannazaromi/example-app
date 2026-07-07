@@ -24,6 +24,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/posts/{id}', [PostController::class, 'update']);
     Route::delete('/posts/{id}', [PostController::class, 'destroy']);
 
+    Route::get('/posts/{id}/download-pdf', [PostController::class, 'downloadPdf']);
+
     Route::get('/profile/avatar', [ProfileController::class, 'avatarEdit']);
     Route::post('/profile/avatar/update', [ProfileController::class, 'avatarUpdate']);
 });

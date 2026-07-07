@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Category;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -112,5 +113,21 @@ class PostController extends Controller
         $post->delete();
 
         return redirect('/posts')->with('success', 'Berita berhasil dihapus!');
+    }
+
+    public function downloadPdf($id)
+    {
+        $post = Post::with('category')->findOrFail($id);
+
+        $data = [
+            'title' => 'Cetak Berita - ' . $post->title,
+            'post'  => $post
+        ];
+
+        $pdf = Pdf::loadView('post.pdf', $data);
+
+        $pdf->setPaper('a4', 'portrait');
+
+        return $pdf->stream('Berita-' . $post->slug . '.pdf');
     }
 }

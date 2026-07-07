@@ -58,6 +58,10 @@
                             </td>
                             <td class="text-center">
                                 <div class="btn-group">
+                                    <a href="/posts/{{ $post->id }}/download-pdf" class="btn btn-sm btn-secondary"
+                                        target="_blank" title="Preview PDF">
+                                        <i class="bi bi-file-earmark-pdf"></i>
+                                    </a>
                                     <a href="/posts/{{ $post->id }}/edit" class="btn btn-sm btn-warning"><i
                                             class="bi bi-pencil"></i></a>
 
